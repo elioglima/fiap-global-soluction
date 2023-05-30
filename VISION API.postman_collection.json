@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "70285972-2201-4950-b3ca-5f8e579a1e32",
+		"name": "VISION API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3890866",
+		"_collection_link": "https://lightstoreapi.postman.co/workspace/FIAP~d3671c76-4024-4dda-a62a-948718576d45/collection/3890866-70285972-2201-4950-b3ca-5f8e579a1e32?action=share&creator=3890866&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Consultar Usuario por Codigo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/user?id=6466032822b9a867fd065db4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6466032822b9a867fd065db4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Todos Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adiciona Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Elio Lima\",\n    \"mail\": \"elio.lima@fiap.com.br\",\n    \"password\": \"Ab@102030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Acesso ao Sistema",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"token\", pm.response.json().data.token);",
+									"pm.globals.set(\"refreshKey\", pm.response.json().data.refreshKey);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mail\": \"elio.designer@hotmail.com\",\n    \"password\": \"Ab@102030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/usuario/acesso",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"usuario",
+								"acesso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Renova Acesso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": {{token}},\n    \"refreshKey\": {{refreshKey}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/user/access",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Sessao",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mail\": \"elio.designer@gmail.com\",\n    \"password\": \"Ab@102030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/user/access",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Foto Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photoBase64\": \"data:image/HEIC;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAB9KADAAQAAAABAAAB9AAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABD ....\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/user/foto?id=6466032822b9a867fd065db4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user",
+								"foto"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6466032822b9a867fd065db4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/user?id=6422e659477c348468f01795",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6422e659477c348468f01795"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "Consultar Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/category",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Elio Lima\",\n    \"email\": \"elio.designer@hotmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/category?id=59a6f9f6633aab53fa6309f1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "59a6f9f6633aab53fa6309f1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Abigail Lima\",\n    \"email\": \"abigail.lima@hotmail.com\",\n    \"senha\": \"Ab@102030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/category",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/category?id=6422e659477c348468f01795",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6422e659477c348468f01795"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crawler",
+			"item": [
+				{
+					"name": "Consultar Parametros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/crw/category",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crw",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Regioes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/crw/region",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crw",
+								"region"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adiciona Conteudo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Elio Lima\",\n    \"email\": \"elio.designer@hotmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/crw/contents",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crw",
+								"contents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza Conteudo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Abigail Lima\",\n    \"email\": \"abigail.lima@hotmail.com\",\n    \"senha\": \"Ab@102030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/crw/contents",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crw",
+								"contents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Conteudo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/crw/contents?id=6422e659477c348468f01795",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crw",
+								"contents"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6422e659477c348468f01795"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
